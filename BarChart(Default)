@@ -1,0 +1,13 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+file_path = r"C:\Users\ASUS\Downloads\LoanData_Preprocessed_v1.2.csv"
+loan_data = pd.read_csv(file_path)
+
+loan_data['default'].value_counts().plot(kind='bar', color=['skyblue', 'orange'])
+plt.title("Distribution of Default Status")
+plt.xlabel("Default Status (0 = No, 1 = Yes)")
+plt.ylabel("Frequency")
+plt.xticks(rotation=0)
+plt.show()
