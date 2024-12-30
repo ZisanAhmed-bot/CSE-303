@@ -1,0 +1,41 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset
+file_path = r"C:\Users\ASUS\Downloads\LoanData_Preprocessed_v1.2.csv"
+loan_data = pd.read_csv(file_path)
+
+continuous_columns = ['age', 'employ', 'address', 'income', 'debtinc', 'creddebt', 'othdebt']
+categorical_columns = ['ed', 'default']
+
+continuous_stats = []
+for col in continuous_columns:
+    mean = loan_data[col].mean()
+    median = loan_data[col].median()
+    variance = loan_data[col].var()
+    std_dev = loan_data[col].std()
+    continuous_stats.append([col, mean, median, variance, std_dev])
+
+continuous_df = pd.DataFrame(
+    continuous_stats, 
+    columns=["Column", "Mean", "Median", "Variance", "Std Dev"]
+)
+
+categorical_stats = []
+for col in categorical_columns:
+    freq = loan_data[col].value_counts()
+    percentage = loan_data[col].value_counts(normalize=True) * 100
+    for value in freq.index:
+        categorical_stats.append([col, value, freq[value], percentage[value]])
+
+categorical_df = pd.DataFrame(
+    categorical_stats,
+    columns=["Column", "Value", "Frequency", "Percentage"]
+)
+
+print("Continuous Columns Statistics:\n")
+print(continuous_df)
+
+print("\nCategorical/Discrete Columns Frequency and Percentage:\n")
+print(categorical_df)
