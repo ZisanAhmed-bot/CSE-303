@@ -1,0 +1,11 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+file_path = r"C:\Users\ASUS\Downloads\LoanData_Preprocessed_v1.2.csv"
+loan_data = pd.read_csv(file_path)
+
+loan_data['default'].value_counts().plot(kind='pie', autopct='%1.1f%%', startangle=90, colors=['skyblue', 'orange'])
+plt.title("Default Status Proportion")
+plt.ylabel("")
+plt.show()
